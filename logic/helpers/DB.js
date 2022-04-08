@@ -37,19 +37,19 @@ const DB = {
         if (!USERS[id]) {
             USERS[id] = data;
             return true;
-        } else return false;
+        } else return null;
     },
 
     delUser: function(id) {
         if (!USERS[id]) {
             delete USERS[id];
             return true;
-        } else return false;
+        } else return null;
     },
 
     findUserById: function(id) {
         if (USERS[id]) return USERS[id];
-        else return false;
+        else return null;
     },
 
     findUserByName: function(user) {
@@ -58,7 +58,7 @@ const DB = {
                 return USERS[u];
             }
         }
-        return false;
+        return null;
     },
 
     findUserByNick: function(nick) {
@@ -67,7 +67,7 @@ const DB = {
                 return USERS[u];
             }
         }
-        return false;
+        return null;
     },
 
     findUserByMail: function(mail) {
@@ -76,7 +76,7 @@ const DB = {
                 return USERS[u];
             }
         }
-        return false;
+        return null;
     },
 
     findAllUsers: function(key , condition , value) {
@@ -115,19 +115,25 @@ const DB = {
         }
         return f;
     },
+    
+    getUserValue: function(id , key) {
+        if(USERS[id]){
+            return USERS[id][key];
+        }else return null;
+    }
 
     setUserValue: function(id , key , value) {
         if (USERS[id]) {
             USERS[id][key] = value;
             return true;
-        } else return false;
+        } else return null;
     },
 
     addUserValue: function(id , key , value) {
         if (USERS[id]) {
             USERS[id][key] += value;
             return true;
-        } else return false;
+        } else return null;
     }
 
 };
