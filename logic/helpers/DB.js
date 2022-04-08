@@ -20,6 +20,10 @@ const DB = {
         }
         console.timeEnd("Users loaded in:");
     },
+    
+    loadAll: function() {
+        this.loadUsers();
+    },
 
     saveUsers: async function() {
         console.time("Users saved in:");
