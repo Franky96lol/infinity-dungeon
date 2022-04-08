@@ -162,7 +162,7 @@ const register = async (req , res) => {
     account.password = bcrypt.hashSync(password, 10);
   
     try {
-        console.log(DB.addUser(account.id , account));
+        DB.addUser(account.id , account);
         
         const nodemailer = require("nodemailer");
         const transport = nodemailer.createTransport({

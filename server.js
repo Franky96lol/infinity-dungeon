@@ -13,6 +13,7 @@ const bodyParser = require("body-parser");
 
 
 app.use(cors());
+
 app.use(bodyParser.urlencoded({
     extended: false
 }));
@@ -34,6 +35,6 @@ app.use(function (req , res){
 
 server.listen(config.PORT , (log) => console.log("Server running on port:" + config.PORT));
 
-module.exports = io;
-
-require(config.LOGIC + "/socket.js");
+io.on("connection" , (socket) => {
+    console.log(socket);
+});
