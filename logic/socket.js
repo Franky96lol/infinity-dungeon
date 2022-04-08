@@ -14,8 +14,14 @@ io.on("connection" , (socket) => {
     if(!DB.findUserById(id)) return socket.disconnect();
     
     io.sockets[id] = socket;
+    DB.setUserValue(id , "isOnline" , true);
     
     load(io , socket , id);
+    
+    socket.on("disconnect" , (data) => {
+        delete io.socket[id];
+        
+    });
 });
 
 module.exports = true;
