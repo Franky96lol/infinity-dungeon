@@ -27,10 +27,14 @@ const DB = {
             await fs.writeFile(config.DB + "/users/" + u + ".json", JSON.stringify(USERS[u]), ()=> {});
         }
         console.timeEnd("Users saved in:");
+        return true;
     },
     
     autoSave: function(time) {
-        setInterval(this.saveUsers , time);
+        async function s() {
+            await this.saveUsers();
+        }
+        setInterval(s , time);
     },
 
     addUser: function(id , data) {
@@ -135,7 +139,6 @@ const DB = {
             return true;
         } else return null;
     }
-
 };
 
 module.exports = DB;
