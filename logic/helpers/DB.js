@@ -128,7 +128,7 @@ const DB = {
         if(USERS[id]){
             return USERS[id][key];
         }else return null;
-    }
+    },
 
     setUserValue: function(id , key , value) {
         if (USERS[id]) {
