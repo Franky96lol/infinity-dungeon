@@ -91,7 +91,6 @@ const register = async (req , res) => {
         level: 1,
         xp: 0,
         pos : config.PSTART,
-        size : config.HERO_SIZE,
         class : "",
         gold: 0,
         gems: 0,
@@ -145,6 +144,7 @@ const register = async (req , res) => {
             zone : "",
             privates : []
         },
+        firstEnter: false,
         isOnline: false,
         lastTimeOnline: new Date().getTime(),
         isOnCombat: false,
@@ -157,7 +157,7 @@ const register = async (req , res) => {
     
     account.id = uid.alphanum(8);
     account.username = username;
-    account.nickname = "apj" + uid.num(6);
+    account.nickname = "pj" + uid.num(6);
     account.email = email;
     account.password = bcrypt.hashSync(password, 10);
   
