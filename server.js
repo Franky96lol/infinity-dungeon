@@ -10,7 +10,7 @@ const io = require("socket.io")(server);
 const router = require(config.LOGIC + "/router.js");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-
+const DB = require(config.LOGIC + "/helper/DB.js");
 
 app.use(cors());
 
@@ -28,13 +28,17 @@ app.post("/wakeup", (req, res) => {
     });
 });
 //Error route
-app.use(function (req , res){ 
+app.use((req , res) => { 
     res.json({
     status: false, message: "ERROR 404"});
 });
+
+DB.loadUsers();
 
 server.listen(config.PORT , (log) => console.log("Server running on port:" + config.PORT));
 
 module.exports = io;
 
 require(config.LOGIC + "/socket.js");
+
+DB.autoSave(60 * 1000);
