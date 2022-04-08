@@ -1,6 +1,6 @@
 /* Base Config */
 const config = { 
-    URL: "https://infinity-dungeon.glitch.com", 
+    URL: "https://infinity-dungeon.glitch.me", 
     PORT: process.env.PORT || 8081, //port
     DIRNAME: __dirname, //root folder
     DB: __dirname + "/database", //database
