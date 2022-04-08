@@ -13,6 +13,8 @@ io.on("connection" , (socket) => {
     if(!DB.findUserById(id)) return socket.disconnect();
     
     io.sockets[id] = socket;
+    
+    
 });
 
 module.exports = true;
