@@ -149,6 +149,7 @@ const register = async (req , res) => {
         lastTimeOnline: new Date().getTime(),
         isOnCombat: false,
         isOnMenu: false,
+        isOnChat: false,
         isTrading: false,
         suscribed: false,
         verified: false,
