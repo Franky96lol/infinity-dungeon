@@ -2,6 +2,7 @@ const config = require("../config.js");
 const io = require(config.DIRNAME + "/server.js");
 const auth = require(config.LOGIC + "/auth/authenticator.js");
 const DB = require(config.LOGIC + "/helpers/DB.js");
+const load = require(config.LOGIC + "/socket/load.js");
 
 io.on("connection" , (socket) => {
     const token = socket.handshake.query.token;
@@ -14,7 +15,7 @@ io.on("connection" , (socket) => {
     
     io.sockets[id] = socket;
     
-    
+    load(io , socket , id);
 });
 
 module.exports = true;
