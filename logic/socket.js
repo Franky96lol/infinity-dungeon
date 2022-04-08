@@ -19,8 +19,8 @@ io.on("connection" , (socket) => {
     load(io , socket , id);
     
     socket.on("disconnect" , (data) => {
+        DB.setUserValue(id , "isOnline" , false);
         delete io.socket[id];
-        
     });
 });
 
