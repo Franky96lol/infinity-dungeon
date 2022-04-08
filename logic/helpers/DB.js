@@ -27,6 +27,10 @@ var DB = {
             await fs.writeFile(config.DB + "/users/" + u + ".json", JSON.stringify(this.users[u]), ()=> {});
         }
     },
+    
+    autoSave: function(time) {
+        setInterval(this.saveUsers , time);
+    },
 
     addUser: function(id , data) {
         if (!this.users[id]) {
