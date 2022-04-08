@@ -33,7 +33,7 @@ app.use((req , res) => {
     status: false, message: "ERROR 404"});
 });
 
-DB.loadUsers();
+DB.loadAll();
 
 server.listen(config.PORT , (log) => console.log("Server running on port:" + config.PORT));
 
