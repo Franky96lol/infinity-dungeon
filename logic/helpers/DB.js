@@ -5,15 +5,15 @@
 const fs = require("fs");
 const config = require("../../config.js");
 
-var DB = {
-    users: {},
+var USERS = {} , MAPS = {} , ITEMS = {} , NPCS = {} , MOOBS = {};
 
+const DB = {
     loadUsers: function () {
         console.time("Users loaded in:")
         const _users = fs.readdirSync(config.DB + "/users/");
         try {
             for (let u of _users) {
-                this.users[u.split(".")[0]] = JSON.parse(fs.readFileSync(config.DB + "/users/" + u));
+                USERS[u.split(".")[0]] = JSON.parse(fs.readFileSync(config.DB + "/users/" + u));
             }
         }catch(err) {
             console.error(err);
@@ -23,8 +23,8 @@ var DB = {
 
     saveUsers: async function() {
         console.time("Users saved in:");
-        for (let u in this.users) {
-            await fs.writeFile(config.DB + "/users/" + u + ".json", JSON.stringify(this.users[u]), ()=> {});
+        for (let u in USERS) {
+            await fs.writeFile(config.DB + "/users/" + u + ".json", JSON.stringify(USERS[u]), ()=> {});
         }
         console.timeEnd("Users saved in:");
     },
@@ -34,81 +34,81 @@ var DB = {
     },
 
     addUser: function(id , data) {
-        if (!this.users[id]) {
-            this.users[id] = data;
+        if (!USERS[id]) {
+            USERS[id] = data;
             return true;
         } else return false;
     },
 
     delUser: function(id) {
-        if (!this.users[id]) {
-            delete this.users[id];
+        if (!USERS[id]) {
+            delete USERS[id];
             return true;
         } else return false;
     },
 
     findUserById: function(id) {
-        if (this.users[id]) return this.users[id];
+        if (USERS[id]) return USERS[id];
         else return false;
     },
 
     findUserByName: function(user) {
-        for (let u in this.users) {
-            if (this.users[u].username == user) {
-                return this.users[u];
+        for (let u in USERS) {
+            if (USERS[u].username == user) {
+                return USERS[u];
             }
         }
         return false;
     },
 
     findUserByNick: function(nick) {
-        for (let u in this.users) {
-            if (this.users[u].nick == nick) {
-                return this.users[u];
+        for (let u in USERS) {
+            if (USERS[u].nick == nick) {
+                return USERS[u];
             }
         }
         return false;
     },
 
     findUserByMail: function(mail) {
-        for (let u in this.users) {
-            if (this.users[u].email == mail) {
-                return this.users[u];
+        for (let u in USERS) {
+            if (USERS[u].email == mail) {
+                return USERS[u];
             }
         }
         return false;
     },
 
-    findAll: function(key , condition , value) {
+    findAllUsers: function(key , condition , value) {
         let f = [];
-        for (let u in this.users) {
+        for (let u in USERS) {
             switch(condition){
                 case "==":
-                    if(this.users[u][key] == value) f.push(this.users[u]);
+                    if(USERS[u][key] == value) f.push(USERS[u]);
                     return f;
                     break;
                 case "!=":
-                    if(this.users[u][key] != value) f.push(this.users[u]);
+                    if(USERS[u][key] != value) f.push(USERS[u]);
                     return f;
                     break;
                 case "<":
-                    if(this.users[u][key] < value) f.push(this.users[u]);
+                    if(USERS[u][key] < value) f.push(USERS[u]);
                     return f;
                     break;
                 case ">":
-                    if(this.users[u][key] > value) f.push(this.users[u]);
+                    if(USERS[u][key] > value) f.push(USERS[u]);
                     return f;
                     break;
                 case "<=":
-                    if(this.users[u][key] <= value) f.push(this.users[u]);
+                    if(USERS[u][key] <= value) f.push(USERS[u]);
                     return f;
                     break;
                 case ">=":
-                    if(this.users[u][key] >= value) f.push(this.users[u]);
+                    if(USERS[u][key] >= value) f.push(USERS[u]);
                     return f;
                     break;
                 default:
-                    f.push(this.users[u]);
+                    f.push(USERS[u]);
                     return f;
                     break;
             }
@@ -116,16 +116,16 @@ var DB = {
         return f;
     },
 
-    setValue: function(id , key , value) {
-        if (this.users[id]) {
-            this.users[id][key] = value;
+    setUserValue: function(id , key , value) {
+        if (USERS[id]) {
+            USERS[id][key] = value;
             return true;
         } else return false;
     },
 
-    addValue: function(id , key , value) {
-        if (this.users[id]) {
-            this.users[id][key] += value;
+    addUserValue: function(id , key , value) {
+        if (USERS[id]) {
+            USERS[id][key] += value;
             return true;
         } else return false;
     }
