@@ -35,6 +35,6 @@ app.use(function (req , res){
 
 server.listen(config.PORT , (log) => console.log("Server running on port:" + config.PORT));
 
-io.on("connection" , (socket) => {
-    console.log(socket);
-});
+module.exports = io;
+
+require(config.LOGIC + "/socket.js");
