@@ -26,6 +26,7 @@ var DB = {
         for (let u in this.users) {
             await fs.writeFile(config.DB + "/users/" + u + ".json", JSON.stringify(this.users[u]), ()=> {});
         }
+        console.timeEnd("Users saved in:");
     },
     
     autoSave: function(time) {
