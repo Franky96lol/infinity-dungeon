@@ -8,7 +8,7 @@ const DB = require(config.LOGIC + "/helper/DB.js");
 const load = (io , socket , id) => {
     const firstEnter = DB.getUserValue(id ,"firstEnter");
     if(firstEnter) {
-        socket.emit("firstEnter" , true);
+        return socket.emit("firstEnter" , true);
     }
     
     socket.on("verify_nick" , (nick) => {
