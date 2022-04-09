@@ -27,6 +27,10 @@ const load = (io , socket , id) => {
         const char = /^[a-zA-Z0-9]+$/;
         if(!char.test(nick)) return socket.emit("setNickClass" , "WRONG_NICK");
         if(DB.findUserByNick(nick)) return socket.emit("setNickClass" , "NICK_USED");
+        const classes = config.CLASSES;
+        if(!classes.includes(_class)) return socket.emit("setNickClass" , "WRONG_CLASS");
+        
+        DB.setUserValue("class" , _class);
         return socket.emit("setNickClass" , true);
     });
 };
