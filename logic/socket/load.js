@@ -21,7 +21,12 @@ const load = (io , socket , id) => {
     });
     
     socket.on("setNickClass" , (nick , _class) => {
-        if(!nick || !_class) return socket.emit("setNickClass" , false);
-        
+        if(!nick || !_class) return socket.emit("setNickClass" , "WRONG_DATA");
+        if(!nick) return socket.emit("setNickClass" , "EMPTY_NICK");
+        if(nick.length < 4) return socket.emit("setNickClass" , "SHORT_NICK");
+        const char = /^[a-zA-Z0-9]+$/;
+        if(!char.test(nick)) return socket.emit("setNickClass" , "WRONG_NICK");
+        if(DB.findUserByNick(nick)) return socket.emit("setNickClass" , "NICK_USED");
+        return socket.emit("setNickClass" , true);
     });
 };
