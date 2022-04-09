@@ -20,8 +20,8 @@ const load = (io , socket , id) => {
         return socket.emit("verify_nick" , "NICK_GOOD");
     });
     
-    socket.on("setFirstEnter" , (nick , _class) => {
-        if(!nick || !_class) return socket.emit("firstEnter" , true);
+    socket.on("setNickClass" , (nick , _class) => {
+        if(!nick || !_class) return socket.emit("setNickClass" , false);
         
     });
 };
