@@ -39,5 +39,7 @@ const load = (io , socket , id) => {
     firstEnter = DB.getUserValue(id ,"firstEnter");
     if(firstEnter) {
         return socket.emit("firstEnter" , true);
+    }else{
+        
     }
 };
