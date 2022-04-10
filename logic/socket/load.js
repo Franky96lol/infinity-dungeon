@@ -6,7 +6,7 @@ const config = require("../../config.js");
 const DB = require(config.LOGIC + "/helper/DB.js");
 
 const load = (io , socket , id) => {
-    const firstEnter = DB.getUserValue(id ,"firstEnter");
+    let firstEnter = DB.getUserValue(id ,"firstEnter");
     if(firstEnter) {
         return socket.emit("firstEnter" , true);
     }
@@ -35,4 +35,9 @@ const load = (io , socket , id) => {
         DB.setUserValue("firstEnter" , false);
         return socket.emit("setNickClass" , true);
     });
+    
+    firstEnter = DB.getUserValue(id ,"firstEnter");
+    if(firstEnter) {
+        return socket.emit("firstEnter" , true);
+    }
 };
