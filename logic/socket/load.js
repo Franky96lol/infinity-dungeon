@@ -32,6 +32,7 @@ const load = (io , socket , id) => {
         
         DB.setUserValue("nickname" , nick);
         DB.setUserValue("class" , _class);
+        DB.setUserValue("firstEnter" , false);
         return socket.emit("setNickClass" , true);
     });
 };
