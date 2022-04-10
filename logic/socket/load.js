@@ -30,6 +30,7 @@ const load = (io , socket , id) => {
         const classes = config.CLASSES;
         if(!classes.includes(_class)) return socket.emit("setNickClass" , "WRONG_CLASS");
         
+        DB.setUserValue("nickname" , nick);
         DB.setUserValue("class" , _class);
         return socket.emit("setNickClass" , true);
     });
